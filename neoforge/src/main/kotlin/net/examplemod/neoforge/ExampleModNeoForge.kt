@@ -5,7 +5,7 @@ import net.neoforged.fml.common.Mod
 
 @Mod(ExampleMod.MOD_ID)
 object ExampleModNeoForge {
-  init {
-    ExampleMod.init()
-  }
+    init {
+        ExampleMod.init()
+    }
 }

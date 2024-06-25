@@ -4,5 +4,5 @@ import net.examplemod.ExampleMod
 
 @Suppress("unused")
 fun init() {
-  ExampleMod.init()
+    ExampleMod.init()
 }
