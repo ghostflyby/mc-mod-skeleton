@@ -39,6 +39,9 @@ dependencies {
 
     // Fabric Kotlin
     modRuntimeOnly("net.fabricmc:fabric-language-kotlin:${rootProject.property("fabric_kotlin_version")}")
+
+    ksp(project(":fabricEventProcessor"))
+    compileOnly(project(":fabricEventProcessor"))
 }
 
 tasks.processResources {

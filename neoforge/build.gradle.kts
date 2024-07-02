@@ -41,7 +41,7 @@ dependencies {
     shadowCommon(project(":common", "transformProductionNeoForge")) { isTransitive = false }
 
     // Kotlin For Forge
-    runtimeOnly("thedarkcolour:kotlinforforge-neoforge:${rootProject.property("kotlin_for_forge_version")}")
+    implementation("thedarkcolour:kotlinforforge-neoforge:${rootProject.property("kotlin_for_forge_version")}")
 }
 
 tasks.processResources {
