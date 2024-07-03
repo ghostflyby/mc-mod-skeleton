@@ -1,0 +1,5 @@
+*
+!.gitignore
+!misc.xml
+!dictionaries
+!dictionaries/*
