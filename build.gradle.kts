@@ -8,7 +8,6 @@ plugins {
     id("dev.architectury.loom") version "1.6-SNAPSHOT" apply false
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("com.diffplug.spotless") version "7.0.0.BETA1"
-    id("com.google.devtools.ksp") version "2.0.0-1.0.21"
 }
 
 architectury {
@@ -46,7 +45,6 @@ allprojects {
     apply(plugin = "kotlin")
     apply(plugin = "org.jetbrains.kotlin.plugin.serialization")
     apply(plugin = "maven-publish")
-    apply(plugin = "com.google.devtools.ksp")
 
     base.archivesName.set(rootProject.property("archives_base_name").toString())
     version = rootProject.property("mod_version").toString()

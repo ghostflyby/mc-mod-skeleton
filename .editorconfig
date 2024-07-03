@@ -1,5 +1,0 @@
-root = true
-
-[*.{kt,kts}]
-# noinspection EditorConfigKeyCorrectness
-ktlint_standard_no-wildcard-imports = disabled
