@@ -1,6 +1,3 @@
-plugins {
-    id("com.github.johnrengelman.shadow") version "8.1.1"
-}
 architectury {
     common(rootProject.property("enabled_platforms").toString().split(","))
 }

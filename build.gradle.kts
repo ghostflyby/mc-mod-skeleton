@@ -6,7 +6,7 @@ plugins {
     kotlin("plugin.serialization") version "2.0.0"
     id("architectury-plugin") version "3.4-SNAPSHOT"
     id("dev.architectury.loom") version "1.6-SNAPSHOT" apply false
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("com.github.johnrengelman.shadow") version "8.1.1" apply false
     id("com.diffplug.spotless") version "7.0.0.BETA1"
 }
 
@@ -22,7 +22,6 @@ spotless {
 
 subprojects {
     apply(plugin = "dev.architectury.loom")
-    apply(plugin = "architectury-plugin")
 
     val loom = project.extensions.getByName<LoomGradleExtensionAPI>("loom")
 
@@ -43,6 +42,7 @@ subprojects {
 allprojects {
     apply(plugin = "java")
     apply(plugin = "kotlin")
+    apply(plugin = "architectury-plugin")
     apply(plugin = "org.jetbrains.kotlin.plugin.serialization")
     apply(plugin = "maven-publish")
 
@@ -59,11 +59,11 @@ allprojects {
     }
 
     dependencies {
-        compileOnly(kotlin("stdlib"))
-        compileOnly(kotlin("serialization"))
-        compileOnly(kotlin("reflect"))
-        compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
-        compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1-Beta")
+        api(kotlin("stdlib"))
+        api(kotlin("serialization"))
+        api(kotlin("reflect"))
+        api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+        api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1-Beta")
     }
 
     java {
