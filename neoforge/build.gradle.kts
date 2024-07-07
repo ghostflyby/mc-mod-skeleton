@@ -41,7 +41,9 @@ dependencies {
     shadowCommon(project(":common", "transformProductionNeoForge")) { isTransitive = false }
 
     // Kotlin For Forge
-    runtimeOnly("thedarkcolour:kotlinforforge-neoforge:${rootProject.property("kotlin_for_forge_version")}")
+    runtimeOnly("thedarkcolour:kotlinforforge-neoforge:${rootProject.property("kotlin_for_forge_version")}") {
+        exclude(group = "net.neoforged.fancymodloader", module = "loader")
+    }
 }
 
 tasks.processResources {
