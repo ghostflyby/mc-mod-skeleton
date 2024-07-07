@@ -50,20 +50,12 @@ allprojects {
     version = rootProject.property("mod_version").toString()
     group = rootProject.property("group").toString()
 
-    repositories {
-        // Add repositories to retrieve artifacts from in here.
-        // You should only use this when depending on other mods because
-        // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
-        // See https://docs.gradle.org/current/userguide/declaring_repositories.html
-        // for more information about repositories.
-    }
-
     dependencies {
         api(kotlin("stdlib"))
         api(kotlin("serialization"))
         api(kotlin("reflect"))
-        api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
-        api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1-Beta")
+        api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.0")
+        api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
     }
 
     java {

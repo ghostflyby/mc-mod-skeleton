@@ -22,13 +22,13 @@ configurations {
 }
 
 repositories {
+    maven {
+        setUrl("https://maven.neoforged.net/releases/")
+    }
     // KFF
     maven {
         name = "Kotlin for Forge"
         setUrl("https://thedarkcolour.github.io/KotlinForForge/")
-    }
-    maven {
-        setUrl("https://maven.neoforged.net/releases/")
     }
 }
 

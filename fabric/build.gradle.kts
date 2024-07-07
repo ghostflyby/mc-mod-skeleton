@@ -7,13 +7,6 @@ architectury {
     fabric()
 }
 
-repositories {
-    maven {
-        name = "Terraformers"
-        setUrl("https://maven.terraformersmc.com/")
-    }
-}
-
 loom {
     accessWidenerPath.set(project(":common").loom.accessWidenerPath)
 }
