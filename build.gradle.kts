@@ -2,16 +2,15 @@ import net.fabricmc.loom.api.LoomGradleExtensionAPI
 
 plugins {
     java
-    kotlin("jvm") version "2.0.0"
-    kotlin("plugin.serialization") version "2.0.0"
-    id("architectury-plugin") version "3.4-SNAPSHOT"
-    id("dev.architectury.loom") version "1.6-SNAPSHOT" apply false
-    id("com.github.johnrengelman.shadow") version "8.1.1" apply false
-    id("com.diffplug.spotless") version "7.0.0.BETA1"
+    alias(libs.plugins.kotlin)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.architectury.plugin)
+    alias(libs.plugins.architectury.loom) apply false
+    alias(libs.plugins.spotless)
 }
 
 architectury {
-    minecraft = property("minecraft_version").toString()
+    minecraft = libs.versions.minecraft.get()
 }
 
 spotless {
@@ -21,30 +20,41 @@ spotless {
 }
 
 subprojects {
-    apply(plugin = "dev.architectury.loom")
+    apply(
+        plugin =
+            rootProject.libs.plugins.architectury.loom
+                .get()
+                .pluginId,
+    )
 
     val loom = project.extensions.getByName<LoomGradleExtensionAPI>("loom")
 
     dependencies {
-        "minecraft"("com.mojang:minecraft:${property("minecraft_version")}")
+        with(rootProject) {
+            "minecraft"(libs.minecraft)
 
-        // The following line declares the yarn mappings you may select this one as well.
-        @Suppress("UnstableApiUsage")
-        "mappings"(
-            loom.layered {
-                mappings("net.fabricmc:yarn:${property("yarn_mappings")}:v2")
-                mappings("dev.architectury:yarn-mappings-patch-neoforge:1.20.6+build.4")
-            },
-        )
+            // The following line declares the yarn mappings you may select this one as well.
+            @Suppress("UnstableApiUsage")
+            "mappings"(
+                loom.layered {
+                    mappings(libs.yarn.mapping)
+                    mappings(libs.yarn.patch)
+                },
+            )
+        }
     }
 }
 
 allprojects {
+    fun applyPlugin(plugin: Provider<PluginDependency>) {
+        apply(plugin = plugin.get().pluginId)
+    }
     apply(plugin = "java")
-    apply(plugin = "kotlin")
-    apply(plugin = "architectury-plugin")
-    apply(plugin = "org.jetbrains.kotlin.plugin.serialization")
-    apply(plugin = "maven-publish")
+    with(rootProject) {
+        applyPlugin(libs.plugins.kotlin.asProvider())
+        applyPlugin(libs.plugins.kotlin.serialization)
+        applyPlugin(libs.plugins.architectury.plugin)
+    }
 
     base.archivesName.set(rootProject.property("archives_base_name").toString())
     version = rootProject.property("mod_version").toString()
@@ -54,8 +64,10 @@ allprojects {
         api(kotlin("stdlib"))
         api(kotlin("serialization"))
         api(kotlin("reflect"))
-        api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.0")
-        api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
+        with(rootProject) {
+            api(libs.kotlinx.serialization)
+            api(libs.kotlinx.coroutines)
+        }
     }
 
     java {

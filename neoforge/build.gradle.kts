@@ -1,5 +1,5 @@
 plugins {
-    id("com.github.johnrengelman.shadow")
+    alias(libs.plugins.shadow)
 }
 
 architectury {
@@ -33,7 +33,7 @@ repositories {
 }
 
 dependencies {
-    neoForge("net.neoforged:neoforge:${rootProject.property("neoforge_version")}")
+    neoForge(libs.neoforge)
     // Remove the next line if you don't want to depend on the API
     // modApi("dev.architectury:architectury-neoforge:${rootProject.property("architectury_version")}")
 
@@ -41,7 +41,7 @@ dependencies {
     shadowCommon(project(":common", "transformProductionNeoForge")) { isTransitive = false }
 
     // Kotlin For Forge
-    runtimeOnly("thedarkcolour:kotlinforforge-neoforge:${rootProject.property("kotlin_for_forge_version")}") {
+    runtimeOnly(libs.kotlinforforge) {
         exclude(group = "net.neoforged.fancymodloader", module = "loader")
     }
 }
@@ -56,9 +56,8 @@ tasks.processResources {
                 Pair("group", rootProject.property("group")),
                 Pair("version", project.version),
                 Pair("mod_id", rootProject.property("mod_id")),
-                Pair("minecraft_version", rootProject.property("minecraft_version")),
-                Pair("architectury_version", rootProject.property("architectury_version")),
-                Pair("kotlin_for_forge_version", rootProject.property("kotlin_for_forge_version")),
+                Pair("minecraft_version", libs.versions.minecraft.get()),
+                Pair("kotlin_for_forge_version", libs.versions.kotlinforforge.get()),
             ),
         )
     }

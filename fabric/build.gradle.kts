@@ -1,5 +1,5 @@
 plugins {
-    id("com.github.johnrengelman.shadow")
+    alias(libs.plugins.shadow)
 }
 
 architectury {
@@ -22,8 +22,8 @@ configurations {
 }
 
 dependencies {
-    modImplementation("net.fabricmc:fabric-loader:${rootProject.property("fabric_loader_version")}")
-    modApi("net.fabricmc.fabric-api:fabric-api:${rootProject.property("fabric_api_version")}")
+    modImplementation(libs.fabric.loader)
+    modApi(libs.fabric.api)
     // Remove the next line if you don't want to depend on the API
     // modApi("dev.architectury:architectury-fabric:${rootProject.property("architectury_version")}")
 
@@ -31,7 +31,7 @@ dependencies {
     shadowCommon(project(":common", "transformProductionFabric")) { isTransitive = false }
 
     // Fabric Kotlin
-    modRuntimeOnly("net.fabricmc:fabric-language-kotlin:${rootProject.property("fabric_kotlin_version")}")
+    modRuntimeOnly(libs.fabric.kotlin)
 }
 
 tasks.processResources {
@@ -44,9 +44,12 @@ tasks.processResources {
                 Pair("group", rootProject.property("group")),
                 Pair("version", project.version),
                 Pair("mod_id", rootProject.property("mod_id")),
-                Pair("minecraft_version", rootProject.property("minecraft_version")),
-                Pair("architectury_version", rootProject.property("architectury_version")),
-                Pair("fabric_kotlin_version", rootProject.property("fabric_kotlin_version")),
+                Pair("minecraft_version", libs.versions.minecraft.get()),
+                Pair(
+                    "fabric_kotlin_version",
+                    libs.versions.fabric.kotlin
+                        .get(),
+                ),
             ),
         )
     }

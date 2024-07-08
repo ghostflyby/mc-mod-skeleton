@@ -27,13 +27,6 @@ versionRange = "[${minecraft_version},)"
 ordering = "NONE"
 side = "BOTH"
 
-#[[dependencies."${mod_id}"]]
-#modId = "architectury"
-#type = "required"
-#versionRange = "[${architectury_version},)"
-#ordering = "AFTER"
-#side = "BOTH"
-
 [[dependencies."${mod_id}"]]
 modId = "kotlinforforge"
 type = "required"
