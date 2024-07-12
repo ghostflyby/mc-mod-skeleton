@@ -48,6 +48,8 @@ subprojects {
         api(kotlin("stdlib"))
         api(kotlin("serialization"))
         api(kotlin("reflect"))
+
+        testImplementation(kotlin("test-junit"))
     }
 
     java {
