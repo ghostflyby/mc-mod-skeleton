@@ -31,6 +31,13 @@ subprojects {
 
   val loom = project.extensions.getByName<LoomGradleExtensionAPI>("loom")
 
+  repositories {
+    maven {
+      name = "ParchmentMC"
+      setUrl("https://maven.parchmentmc.org")
+    }
+  }
+
   dependencies {
     "minecraft"(libs.minecraft)
 
@@ -38,8 +45,8 @@ subprojects {
     @Suppress("UnstableApiUsage")
     "mappings"(
       loom.layered {
-        mappings(libs.yarn.mapping)
-        mappings(libs.yarn.patch)
+        officialMojangMappings()
+        parchment("org.parchmentmc.data:parchment-1.20.6:2024.06.16@zip")
       },
     )
 

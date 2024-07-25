@@ -3,12 +3,12 @@ minecraft = '1.20.6'
 
 fabric-api = '0.100.0+1.20.6' # https://fabricmc.net/develop/
 fabric-loader = '0.15.11'
-yarn = '1.20.6+build.3'
+# yarn = '1.20.6+build.3'
 fabric-kotlin = '1.11.0+kotlin.2.0.0' # https://www.curseforge.com/minecraft/mc-mods/fabric-language-kotlin
 
 architectury-loom = '1.6-SNAPSHOT'
 architectury-plugin = '3.4-SNAPSHOT'
-yarn-patch = '1.20.6+build.4'
+# yarn-patch = '1.20.6+build.4'
 
 kotlin = '2.0.0'
 kotlinx-coroutines = '1.8.1'
@@ -26,7 +26,7 @@ minecraft = { module = 'com.mojang:minecraft', version.ref = "minecraft" }
 fabric-api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = 'fabric-api' }
 fabric-loader = { module = "net.fabricmc:fabric-loader", version.ref = 'fabric-loader' }
 fabric-kotlin = { module = "net.fabricmc:fabric-language-kotlin", version.ref = 'fabric-kotlin' }
-yarn-mapping = { module = 'net.fabricmc:yarn', version.ref = "yarn" }
+# yarn-mapping = { module = 'net.fabricmc:yarn', version.ref = "yarn" }
 
 kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = 'kotlinx-coroutines' }
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = 'kotlinx-serialization' }
@@ -34,7 +34,7 @@ kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-
 neoforge = { module = "net.neoforged:neoforge", version.ref = 'neoforge' }
 kotlinforforge = { module = "thedarkcolour:kotlinforforge-neoforge", version.ref = 'kotlinforforge' }
 
-yarn-patch = { module = 'dev.architectury:yarn-mappings-patch-neoforge', version.ref = "yarn-patch" }
+# yarn-patch = { module = 'dev.architectury:yarn-mappings-patch-neoforge', version.ref = "yarn-patch" }
 
 
 
