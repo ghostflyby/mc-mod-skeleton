@@ -1,4 +1,6 @@
 import net.fabricmc.loom.api.LoomGradleExtensionAPI
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
   java
@@ -56,11 +58,22 @@ subprojects {
     api(kotlin("serialization"))
     api(kotlin("reflect"))
 
-    testImplementation(kotlin("test-junit"))
+    testImplementation(kotlin("test"))
   }
 
   java {
     withSourcesJar()
+    targetCompatibility = JavaVersion.toVersion(rootProject.property("jvm_version")!!)
+    sourceCompatibility = targetCompatibility
+  }
+
+  kotlin {
+    target {
+      @OptIn(ExperimentalKotlinGradlePluginApi::class)
+      compilerOptions {
+        jvmTarget.set(JvmTarget.fromTarget(rootProject.property("jvm_version").toString()))
+      }
+    }
   }
 }
 

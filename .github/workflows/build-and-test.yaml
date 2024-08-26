@@ -1,0 +1,41 @@
+name: Build and Test
+on:
+    push:
+        branches:
+            - main
+            - mc/*
+        paths:
+            - '**/src/**'
+            - '**/*.gradle.kts'
+            - 'gradle.properties'
+            - 'gradle/**'
+    pull_request:
+        branches: [ '*' ]
+        paths:
+            - '**/src/**'
+            - '**/*.gradle.kts'
+            - 'gradle.properties'
+            - 'gradle/**'
+
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        
+        steps:
+            -   uses: actions/checkout@v4
+            -   name: get jvm_version
+                id: jvm_version
+                shell: pwsh
+                run: gc ./gradle.properties|Select-String -Raw jvm_version= >> $GITHUB_OUTPUT
+            -   uses: actions/setup-java@v4
+                with:
+                    distribution: microsoft
+                    java-version: ${{ steps.jvm_version.outputs.jvm_version}}
+            -   name: Setup Gradle
+                uses: gradle/actions/setup-gradle@v4
+                with:
+                    gradle-version: wrapper
+            -   name: run build
+                shell: pwsh
+                run: ./gradlew build
