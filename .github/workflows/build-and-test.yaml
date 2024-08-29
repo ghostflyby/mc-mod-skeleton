@@ -21,7 +21,7 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
-        
+
         steps:
             -   uses: actions/checkout@v4
             -   name: get jvm_version
@@ -36,6 +36,7 @@ jobs:
                 uses: gradle/actions/setup-gradle@v4
                 with:
                     gradle-version: wrapper
+                    cache-read-only: ${{ github.ref != 'refs/heads/main' || !startsWith(github.ref, 'refs/heads/mc/') }}
             -   name: run build
                 shell: pwsh
                 run: ./gradlew build
