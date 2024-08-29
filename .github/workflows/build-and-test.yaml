@@ -9,6 +9,7 @@ on:
             - '**/*.gradle.kts'
             - 'gradle.properties'
             - 'gradle/**'
+            - '.github/workflows/*'
     pull_request:
         branches: [ '*' ]
         paths:
@@ -16,6 +17,7 @@ on:
             - '**/*.gradle.kts'
             - 'gradle.properties'
             - 'gradle/**'
+            - '.github/workflows/*'
 
 
 jobs:
