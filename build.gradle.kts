@@ -48,7 +48,7 @@ subprojects {
     "mappings"(
       loom.layered {
         officialMojangMappings()
-        parchment("org.parchmentmc.data:parchment-1.20.6:2024.06.16@zip")
+        parchment(libs.parchment.get().toString())
       },
     )
 
