@@ -132,7 +132,6 @@ tasks.create("githubRelease") {
           "gh",
           "release",
           "create",
-          "-t",
           tag,
         ) +
         getOutputForRelease()
