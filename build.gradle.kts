@@ -88,3 +88,51 @@ allprojects {
     }
   }
 }
+
+val targetProjects
+  get() =
+    rootProject
+      .property("enabled_platforms")
+      .toString()
+      .split(",")
+      .map { project(it) }
+
+fun targetProjects(action: Action<Project>) {
+  targetProjects
+    .forEach {
+      action.execute(it)
+    }
+}
+
+tasks.create("githubRelease") {
+  group = "publishing"
+  description = "Publishes the mod to GitHub Releases"
+
+  val dependencyTasks =
+    targetProjects.map { it.tasks.getByName("remapJar") } + targetProjects.map { it.tasks.getByName("sourcesJar") }
+
+  dependencyTasks.forEach { dependsOn(it) }
+
+  fun getOutputForRelease() = dependencyTasks.flatMap { it.outputs.files }.map { it.absolutePath }
+
+  doFirst {
+    System.getenv("CI") ?: logger.error("This task should only be run in CI")
+    System.getenv("TAG") ?: logger.error("TAG environment variable not set")
+  }
+
+  doLast {
+
+    val tag = System.getenv("TAG").replace("refs/tags/", "")
+    exec {
+      commandLine =
+        listOf(
+          "gh",
+          "release",
+          "create",
+          "-t",
+          tag,
+        ) +
+        getOutputForRelease()
+    }
+  }
+}

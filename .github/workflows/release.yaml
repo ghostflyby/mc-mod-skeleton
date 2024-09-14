@@ -1,18 +1,14 @@
-name: Build and Test
+name: release
 on:
     push:
         branches:
             - main
             - mc/*
-        paths:
-            - '**/src/**'
-            - '**/*.gradle.kts'
-            - 'gradle.properties'
-            - 'gradle/**'
-            - '.github/workflows/*'
+        tags:
+            - v*
 
 jobs:
-    build:
+    release:
         runs-on: ubuntu-latest
 
         steps:
@@ -30,6 +26,9 @@ jobs:
                 with:
                     gradle-version: wrapper
                     cache-read-only: ${{ github.ref != 'refs/heads/main' && !startsWith(github.ref, 'refs/heads/mc/') }}
-            -   name: run build
+            -   name: build and release
                 shell: pwsh
-                run: ./gradlew build
+                run: ./gradlew githubRelease
+                env:
+                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                    TAG: ${{ github.ref }}
