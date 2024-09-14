@@ -124,6 +124,9 @@ tasks.create("githubRelease") {
 
     val tag = System.getenv("TAG").replace("refs/tags/", "")
     exec {
+      getOutputForRelease().forEach {
+        println(it)
+      }
       commandLine =
         listOf(
           "gh",
