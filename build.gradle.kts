@@ -55,7 +55,6 @@ subprojects {
     api(libs.kotlinx.serialization)
     api(libs.kotlinx.coroutines)
     api(kotlin("stdlib"))
-    api(kotlin("serialization"))
     api(kotlin("reflect"))
 
     testImplementation(kotlin("test"))

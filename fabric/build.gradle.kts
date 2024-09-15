@@ -22,7 +22,7 @@ configurations {
 }
 
 dependencies {
-  modImplementation(libs.fabric.loader)
+  modRuntimeOnly(libs.fabric.loader)
   modApi(libs.fabric.api)
   // Remove the next line if you don't want to depend on the API
   // modApi("dev.architectury:architectury-fabric:${rootProject.property("architectury_version")}")
