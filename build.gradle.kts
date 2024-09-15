@@ -9,6 +9,7 @@ plugins {
   alias(libs.plugins.architectury.plugin)
   alias(libs.plugins.architectury.loom) apply false
   alias(libs.plugins.spotless)
+  alias(libs.plugins.architectury.kotlin) apply false
 }
 
 architectury {
@@ -26,6 +27,7 @@ subprojects {
   applyPlugin(libs.plugins.architectury.plugin)
   applyPlugin(libs.plugins.architectury.loom)
   applyPlugin(libs.plugins.spotless)
+  applyPlugin(libs.plugins.architectury.kotlin)
 
   base.archivesName.set(rootProject.property("archives_base_name").toString())
   version = rootProject.property("mod_version").toString()
@@ -74,9 +76,25 @@ subprojects {
       }
     }
   }
+
+  if (project.path != ":common") {
+    configure<LoomGradleExtensionAPI> {
+      mods {
+        val main = maybeCreate("main")
+        main.apply {
+          sourceSet(project.sourceSets.main.get())
+          sourceSet(project(":common").sourceSets.main.get())
+        }
+      }
+    }
+  }
 }
 
 allprojects {
+
+  architectury {
+    compileOnly()
+  }
 
   spotless {
     kotlin {

@@ -9,6 +9,7 @@ fabric-kotlin = '1.11.0+kotlin.2.0.0' # https://www.curseforge.com/minecraft/mc-
 
 architectury-loom = '1.6-SNAPSHOT'
 architectury-plugin = '3.4-SNAPSHOT'
+architectury-kotlin = '1.0.0'
 # yarn-patch = '1.20.6+build.4'
 
 kotlin = '2.0.0'
@@ -48,5 +49,6 @@ architectury-plugin = { id = 'architectury-plugin', version.ref = 'architectury-
 architectury-loom = { id = 'dev.architectury.loom', version.ref = 'architectury-loom' }
 shadow = { id = 'com.github.johnrengelman.shadow', version.ref = 'shadow' }
 spotless = { id = 'com.diffplug.spotless', version.ref = 'spotless' }
+architectury-kotlin = { id = "com.withertech.architectury.kotlin.plugin", version.ref = 'architectury-kotlin' }
 
 [bundles]
