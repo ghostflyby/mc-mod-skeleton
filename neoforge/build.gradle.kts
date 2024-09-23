@@ -17,6 +17,8 @@ val shadowCommon: Configuration by configurations.creating
 configurations {
   compileClasspath.get().extendsFrom(common)
   runtimeClasspath.get().extendsFrom(common)
+  val developmentNeoForge by getting
+  developmentNeoForge.extendsFrom(common)
 }
 
 repositories {

@@ -17,6 +17,8 @@ val shadowCommon: Configuration by configurations.creating
 configurations {
   compileClasspath.get().extendsFrom(common)
   runtimeClasspath.get().extendsFrom(common)
+  val developmentFabric by getting
+  developmentFabric.extendsFrom(common)
 }
 
 dependencies {
