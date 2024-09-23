@@ -33,3 +33,9 @@ type = "required"
 versionRange = "[${kotlin_for_forge_version},)"
 ordering = "AFTER"
 side = "BOTH"
+
+[[dependencies."${mod_id}"]]
+modId = "fabric_api"
+type = "required"
+ordering = "AFTER"
+side = "BOTH"

@@ -50,6 +50,11 @@ tasks.processResources {
           libs.versions.fabric.kotlin
             .get(),
         ),
+        Pair(
+          "fabric_api_version",
+          libs.versions.fabric.api
+            .get(),
+        ),
       ),
     )
   }

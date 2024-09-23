@@ -30,12 +30,17 @@ repositories {
     name = "Kotlin for Forge"
     setUrl("https://thedarkcolour.github.io/KotlinForForge/")
   }
+  // forgified fabric api
+  maven {
+    setUrl("https://maven.su5ed.dev/releases")
+  }
 }
 
 dependencies {
   neoForge(libs.neoforge)
   // Remove the next line if you don't want to depend on the API
   // modApi("dev.architectury:architectury-neoforge:${rootProject.property("architectury_version")}")
+  modApi(libs.forgified.fabric.api)
 
   common(project(":common", "namedElements")) { isTransitive = false }
   shadowCommon(project(":common", "transformProductionNeoForge")) { isTransitive = false }
