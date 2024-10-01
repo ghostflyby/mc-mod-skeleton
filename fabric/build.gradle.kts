@@ -70,7 +70,7 @@ tasks.remapJar {
   injectAccessWidener.set(true)
   inputFile.set(tasks.shadowJar.get().archiveFile)
   dependsOn(tasks.shadowJar)
-  archiveClassifier.set(project.name)
+  archiveAppendix.set("${project.name}.mc${libs.versions.minecraft.get()}")
 }
 
 tasks.jar {
@@ -80,5 +80,10 @@ tasks.jar {
 tasks.sourcesJar {
   val commonSources = project(":common").tasks.getByName<Jar>("sourcesJar")
   dependsOn(commonSources)
+  archiveAppendix.set("${project.name}.mc${libs.versions.minecraft.get()}")
   from(commonSources.archiveFile.map { zipTree(it) })
+}
+
+tasks.remapSourcesJar {
+  archiveAppendix.set("${project.name}.mc${libs.versions.minecraft.get()}")
 }
