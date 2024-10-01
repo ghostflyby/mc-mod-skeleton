@@ -108,7 +108,7 @@ tasks.create("githubRelease") {
   description = "Publishes the mod to GitHub Releases"
 
   val dependencyTasks =
-    targetProjects.map { it.tasks.getByName("remapJar") } + targetProjects.map { it.tasks.getByName("sourcesJar") }
+    targetProjects.map { it.tasks.getByName("remapJar") } + targetProjects.map { it.tasks.getByName("remapSourcesJar") }
 
   dependencyTasks.forEach { dependsOn(it) }
 
