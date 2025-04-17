@@ -122,7 +122,7 @@ tasks.create("githubRelease") {
   doLast {
 
     val tag = System.getenv("TAG").replace("refs/tags/", "")
-    exec {
+    providers.exec {
       getOutputForRelease().forEach {
         println(it)
       }
@@ -133,7 +133,7 @@ tasks.create("githubRelease") {
           "create",
           tag,
         ) +
-        getOutputForRelease()
+          getOutputForRelease()
     }
   }
 }
