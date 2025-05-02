@@ -54,6 +54,10 @@ dependencies {
 tasks.processResources {
   inputs.property("group", rootProject.property("group"))
   inputs.property("version", project.version)
+  inputs.property("mod_id", rootProject.property("mod_id"))
+  inputs.property("minecraft_version", libs.versions.minecraft.get())
+  inputs.property("kotlin_for_forge_version", libs.versions.kotlinforforge.get())
+  inputs.file("src/main/resources/META-INF/neoforge.mods.toml")
 
   filesMatching("META-INF/neoforge.mods.toml") {
     expand(

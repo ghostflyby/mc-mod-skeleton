@@ -37,6 +37,11 @@ dependencies {
 tasks.processResources {
   inputs.property("group", rootProject.property("group"))
   inputs.property("version", project.version)
+  inputs.property("mod_id", rootProject.property("mod_id"))
+  inputs.property("minecraft_version", libs.versions.minecraft.get())
+  inputs.property("fabric_kotlin_version", libs.versions.fabric.kotlin.get())
+  inputs.property("fabric_api_version", libs.versions.fabric.api.get())
+  inputs.file("src/main/resources/fabric.mod.json")
 
   filesMatching("fabric.mod.json") {
     expand(
