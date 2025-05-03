@@ -28,7 +28,7 @@ subprojects {
   applyPlugin(libs.plugins.spotless)
 
   base.archivesName.set(rootProject.property("archives_base_name").toString())
-  version = rootProject.property("mod_version").toString()
+  version = rootProject.property("version").toString()
   group = rootProject.property("group").toString()
 
   val loom = project.extensions.getByName<LoomGradleExtensionAPI>("loom")

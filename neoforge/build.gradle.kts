@@ -14,6 +14,7 @@ loom {
 val common: Configuration by configurations.creating
 val shadowCommon: Configuration by configurations.creating
 
+@Suppress("UnstableApiUsage")
 configurations {
   compileClasspath.get().extendsFrom(common)
   runtimeClasspath.get().extendsFrom(common)
