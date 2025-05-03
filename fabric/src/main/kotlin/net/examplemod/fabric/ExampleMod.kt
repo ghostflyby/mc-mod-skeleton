@@ -1,10 +1,9 @@
 package net.examplemod.fabric
 
 import net.examplemod.ExampleMod
-import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage
+import net.examplemod.ExampleModInit
 
-@Suppress("unused")
-fun init() {
+@OptIn(ExampleModInit::class)
+internal fun init() {
   ExampleMod.init()
-  ItemStorage.SIDED.id
 }
