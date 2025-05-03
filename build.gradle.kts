@@ -104,7 +104,7 @@ tasks.create("githubRelease") {
 
   dependencyTasks.forEach { dependsOn(it) }
 
-  fun getOutputForRelease() = dependencyTasks.flatMap { it.outputs.files }.map { it.absolutePath }
+  val outputForRelease = dependencyTasks.flatMap { it.outputs.files }.map { it.absolutePath }
 
   doFirst {
     System.getenv("CI") ?: logger.error("This task should only be run in CI")
@@ -115,8 +115,8 @@ tasks.create("githubRelease") {
 
     val tag = System.getenv("TAG").replace("refs/tags/", "")
     providers.exec {
-      getOutputForRelease().forEach {
-        println(it)
+      outputForRelease.forEach {
+        logger.info(it)
       }
       commandLine =
         listOf(
@@ -125,7 +125,7 @@ tasks.create("githubRelease") {
           "create",
           tag,
         ) +
-          getOutputForRelease()
+          outputForRelease
     }
   }
 }
