@@ -53,23 +53,24 @@ subprojects {
     testImplementation(kotlin("test"))
   }
 
+}
+
+allprojects {
+
+  @Suppress("LocalVariableName") val jvm_version: String by properties
+
   java {
     withSourcesJar()
-    targetCompatibility = JavaVersion.toVersion(rootProject.property("jvm_version")!!)
+    targetCompatibility = JavaVersion.toVersion(jvm_version)
     sourceCompatibility = targetCompatibility
   }
 
   kotlin {
-    target {
-      @OptIn(ExperimentalKotlinGradlePluginApi::class)
-      compilerOptions {
-        jvmTarget.set(JvmTarget.fromTarget(rootProject.property("jvm_version").toString()))
-      }
+    @OptIn(ExperimentalKotlinGradlePluginApi::class)
+    compilerOptions {
+      jvmTarget.set(JvmTarget.fromTarget(jvm_version))
     }
   }
-}
-
-allprojects {
 
   spotless {
     kotlin {
