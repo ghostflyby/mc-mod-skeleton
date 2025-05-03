@@ -89,19 +89,17 @@ val targetProjects
       .split(",")
       .map { project(it) }
 
-fun targetProjects(action: Action<Project>) {
-  targetProjects
-    .forEach {
-      action.execute(it)
-    }
-}
-
 tasks.create("githubRelease") {
   group = "publishing"
   description = "Publishes the mod to GitHub Releases"
 
   val dependencyTasks =
     targetProjects.map { it.tasks.getByName("remapJar") } + targetProjects.map { it.tasks.getByName("remapSourcesJar") }
+
+  inputs.properties(
+    "CI" to System.getenv("CI"),
+    "TAG" to System.getenv("TAG"),
+  )
 
   dependencyTasks.forEach { dependsOn(it) }
 
