@@ -36,32 +36,28 @@ dependencies {
 }
 
 tasks.processResources {
-  inputs.property("group", rootProject.property("group"))
-  inputs.property("version", project.version)
-  inputs.property("mod_id", rootProject.property("mod_id"))
-  inputs.property("minecraft_version", libs.versions.minecraft.get())
-  inputs.property("fabric_kotlin_version", libs.versions.fabric.kotlin.get())
-  inputs.property("fabric_api_version", libs.versions.fabric.api.get())
+  val modVersion = project.version.toString()
+  val modId = rootProject.property("mod_id").toString()
+  val mcVersion = libs.versions.minecraft.get()
+  val fabricKotlinVersion = libs.versions.fabric.kotlin.get()
+  val fabricApiVersion = libs.versions.fabric.api.get()
+
+  inputs.property("version", modVersion)
+  inputs.property("mod_id", modId)
+  inputs.property("minecraft_version", mcVersion)
+  inputs.property("fabric_kotlin_version", fabricKotlinVersion)
+  inputs.property("fabric_api_version", fabricApiVersion)
   inputs.file("src/main/resources/fabric.mod.json")
 
   filesMatching("fabric.mod.json") {
     expand(
-      mutableMapOf(
-        Pair("group", rootProject.property("group")),
-        Pair("version", project.version),
-        Pair("mod_id", rootProject.property("mod_id")),
-        Pair("minecraft_version", libs.versions.minecraft.get()),
-        Pair(
-          "fabric_kotlin_version",
-          libs.versions.fabric.kotlin
-            .get(),
-        ),
-        Pair(
-          "fabric_api_version",
-          libs.versions.fabric.api
-            .get(),
-        ),
-      ),
+      mapOf(
+        "version" to modVersion,
+        "mod_id" to modId,
+        "minecraft_version" to mcVersion,
+        "fabric_kotlin_version" to fabricKotlinVersion,
+        "fabric_api_version" to fabricApiVersion,
+      )
     )
   }
 }

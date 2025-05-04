@@ -52,23 +52,26 @@ dependencies {
   }
 }
 
+
 tasks.processResources {
-  inputs.property("group", rootProject.property("group"))
-  inputs.property("version", project.version)
-  inputs.property("mod_id", rootProject.property("mod_id"))
-  inputs.property("minecraft_version", libs.versions.minecraft.get())
-  inputs.property("kotlin_for_forge_version", libs.versions.kotlinforforge.get())
+  val modVersion = version.toString()
+  val modId = rootProject.property("mod_id").toString()
+  val mcVersion = libs.versions.minecraft.get()
+  val kffVersion = libs.versions.kotlinforforge.get()
+  inputs.property("version", modVersion)
+  inputs.property("mod_id", modId)
+  inputs.property("minecraft_version", mcVersion)
+  inputs.property("kotlin_for_forge_version", kffVersion)
   inputs.file("src/main/resources/META-INF/neoforge.mods.toml")
 
   filesMatching("META-INF/neoforge.mods.toml") {
     expand(
-      mutableMapOf(
-        Pair("group", rootProject.property("group")),
-        Pair("version", project.version),
-        Pair("mod_id", rootProject.property("mod_id")),
-        Pair("minecraft_version", libs.versions.minecraft.get()),
-        Pair("kotlin_for_forge_version", libs.versions.kotlinforforge.get()),
-      ),
+      mapOf(
+        "version" to modVersion,
+        "mod_id" to modId,
+        "minecraft_version" to mcVersion,
+        "kotlin_for_forge_version" to kffVersion,
+      )
     )
   }
 }
