@@ -11,6 +11,4 @@ dependencies {
   // Do NOT use other classes from fabric loader
   modImplementation(libs.fabric.loader)
   modApi(libs.fabric.api)
-  // Remove the next line if you don't want to depend on the API
-  // modApi("dev.architectury:architectury:${property("architectury_version")}")
 }
