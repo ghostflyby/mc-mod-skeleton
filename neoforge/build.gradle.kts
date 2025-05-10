@@ -52,7 +52,6 @@ dependencies {
   }
 }
 
-
 tasks.processResources {
   val modVersion = version.toString()
   val modId = rootProject.property("mod_id").toString()
@@ -71,7 +70,7 @@ tasks.processResources {
         "mod_id" to modId,
         "minecraft_version" to mcVersion,
         "kotlin_for_forge_version" to kffVersion,
-      )
+      ),
     )
   }
 }

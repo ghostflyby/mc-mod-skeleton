@@ -53,7 +53,8 @@ subprojects {
     testImplementation(kotlin("test"))
   }
 
-  @Suppress("LocalVariableName") val jvm_version: String by properties
+  @Suppress("LocalVariableName", "ktlint:standard:property-naming")
+  val jvm_version: String by properties
 
   java {
     withSourcesJar()
@@ -123,7 +124,7 @@ tasks.create("githubRelease") {
           "create",
           tag,
         ) +
-          outputForRelease
+        outputForRelease
     }
   }
 }

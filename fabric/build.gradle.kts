@@ -39,8 +39,12 @@ tasks.processResources {
   val modVersion = project.version.toString()
   val modId = rootProject.property("mod_id").toString()
   val mcVersion = libs.versions.minecraft.get()
-  val fabricKotlinVersion = libs.versions.fabric.kotlin.get()
-  val fabricApiVersion = libs.versions.fabric.api.get()
+  val fabricKotlinVersion =
+    libs.versions.fabric.kotlin
+      .get()
+  val fabricApiVersion =
+    libs.versions.fabric.api
+      .get()
 
   inputs.property("version", modVersion)
   inputs.property("mod_id", modId)
@@ -57,7 +61,7 @@ tasks.processResources {
         "minecraft_version" to mcVersion,
         "fabric_kotlin_version" to fabricKotlinVersion,
         "fabric_api_version" to fabricApiVersion,
-      )
+      ),
     )
   }
 }
@@ -75,7 +79,7 @@ tasks.remapJar {
 
   injectAccessWidener.set(true)
 
-  val metadata = listOf(project.name,"mc${libs.versions.minecraft.get()}").joinToString(".")
+  val metadata = listOf(project.name, "mc${libs.versions.minecraft.get()}").joinToString(".")
   archiveVersion.set("$version+$metadata")
 }
 
