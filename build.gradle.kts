@@ -53,10 +53,6 @@ subprojects {
     testImplementation(kotlin("test"))
   }
 
-}
-
-allprojects {
-
   @Suppress("LocalVariableName") val jvm_version: String by properties
 
   java {
@@ -71,7 +67,9 @@ allprojects {
       jvmTarget.set(JvmTarget.fromTarget(jvm_version))
     }
   }
+}
 
+allprojects {
   spotless {
     kotlin {
       ktlint()
