@@ -89,42 +89,45 @@ val targetProjects
       .split(",")
       .map { project(it) }
 
-tasks.create("githubRelease") {
-  group = "publishing"
-  description = "Publishes the mod to GitHub Releases"
+if (System.getenv("CI") != null) {
+  tasks.create("githubRelease") {
+    group = "publishing"
+    description = "Publishes the mod to GitHub Releases"
 
-  val dependencyTasks =
-    targetProjects.map { it.tasks.getByName("remapJar") } + targetProjects.map { it.tasks.getByName("remapSourcesJar") }
+    val dependencyTasks =
+      targetProjects.map { it.tasks.getByName("remapJar") } +
+        targetProjects.map { it.tasks.getByName("remapSourcesJar") }
 
-  inputs.properties(
-    "CI" to System.getenv("CI"),
-    "TAG" to System.getenv("TAG"),
-  )
+    inputs.properties(
+      "CI" to System.getenv("CI"),
+      "TAG" to System.getenv("TAG"),
+    )
 
-  dependencyTasks.forEach { dependsOn(it) }
+    dependencyTasks.forEach { dependsOn(it) }
 
-  val outputForRelease = dependencyTasks.flatMap { it.outputs.files }.map { it.absolutePath }
+    val outputForRelease = dependencyTasks.flatMap { it.outputs.files }.map { it.absolutePath }
 
-  doFirst {
-    System.getenv("CI") ?: logger.error("This task should only be run in CI")
-    System.getenv("TAG") ?: logger.error("TAG environment variable not set")
-  }
+    doFirst {
+      System.getenv("CI") ?: logger.error("This task should only be run in CI")
+      System.getenv("TAG") ?: logger.error("TAG environment variable not set")
+    }
 
-  doLast {
+    doLast {
 
-    val tag = System.getenv("TAG").replace("refs/tags/", "")
-    providers.exec {
-      outputForRelease.forEach {
-        logger.info(it)
+      val tag = System.getenv("TAG").replace("refs/tags/", "")
+      providers.exec {
+        outputForRelease.forEach {
+          logger.info(it)
+        }
+        commandLine =
+          listOf(
+            "gh",
+            "release",
+            "create",
+            tag,
+          ) +
+          outputForRelease
       }
-      commandLine =
-        listOf(
-          "gh",
-          "release",
-          "create",
-          tag,
-        ) +
-        outputForRelease
     }
   }
 }
