@@ -1,2 +1,9 @@
-*
-!.gitignore
+compiler.xml
+jarRepositories.xml
+kotlinc.xml
+misc.xml
+modules.xml
+vcs.xml
+
+runConfigurations
+modules
