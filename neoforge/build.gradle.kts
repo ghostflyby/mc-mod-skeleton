@@ -88,8 +88,8 @@ tasks.remapJar {
 
   injectAccessWidener.set(true)
 
-  val metadata = listOf(project.name, "mc${libs.versions.minecraft.get()}").joinToString(".")
-  archiveVersion.set("$version+$metadata")
+  val metadata = listOf(project.name, libs.versions.minecraft.get()).joinToString("-")
+  archiveAppendix.set(metadata)
 }
 
 tasks.jar {
