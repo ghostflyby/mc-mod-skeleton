@@ -4,9 +4,9 @@ package net.examplemod
 annotation class ExampleModInit
 
 object ExampleMod {
-  const val MOD_ID = "examplemod"
+    const val MOD_ID = "examplemod"
 
-  @ExampleModInit
-  fun init() {
-  }
+    @ExampleModInit
+    fun init() {
+    }
 }

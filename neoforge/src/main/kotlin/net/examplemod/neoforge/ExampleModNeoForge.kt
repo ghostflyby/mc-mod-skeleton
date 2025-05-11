@@ -7,7 +7,7 @@ import net.neoforged.fml.common.Mod
 @OptIn(ExampleModInit::class)
 @Mod(ExampleMod.MOD_ID)
 internal object ExampleModNeoForge {
-  init {
-    ExampleMod.init()
-  }
+    init {
+        ExampleMod.init()
+    }
 }

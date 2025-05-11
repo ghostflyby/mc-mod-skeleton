@@ -14,5 +14,5 @@ trim_trailing_whitespace = false
 end_of_line = crlf
 
 [{*.kt,*.kts}]
-indent_size = 2
+# noinspection EditorConfigKeyCorrectness
 ktlint_standard_no-wildcard-imports = disabled

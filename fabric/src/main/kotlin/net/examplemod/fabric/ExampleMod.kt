@@ -5,5 +5,5 @@ import net.examplemod.ExampleModInit
 
 @OptIn(ExampleModInit::class)
 internal fun init() {
-  ExampleMod.init()
+    ExampleMod.init()
 }
