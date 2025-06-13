@@ -90,7 +90,7 @@ val targetProjects
             .map { project(it) }
 
 if (System.getenv("CI") != null) {
-    tasks.create("githubRelease") {
+    tasks.register("githubRelease") {
         group = "publishing"
         description = "Publishes the mod to GitHub Releases"
 
