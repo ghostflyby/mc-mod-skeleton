@@ -6,7 +6,7 @@ fabric-api = '0.104.0+1.21.1' # https://fabricmc.net/develop/
 fabric-loader = '0.16.5'
 fabric-kotlin = '1.13.0+kotlin.2.1.0' # https://www.curseforge.com/minecraft/mc-mods/fabric-language-kotlin
 
-yarn = '1.21.1+build.3'
+yarn = '1.21.1+build.3:v2'
 yarn-patch = '1.21+build.4'
 
 kotlin = '2.1.0'
@@ -39,7 +39,8 @@ neoforge = { module = 'net.neoforged:neoforge', version.ref = 'neoforge' }
 kotlinforforge = { module = 'thedarkcolour:kotlinforforge-neoforge', version.ref = 'kotlinforforge' }
 forgified-fabric-api = { module = 'org.sinytra.forgified-fabric-api:forgified-fabric-api', version.ref = 'forgified-fabric-api' }
 
-yarn-mapping = { module = 'net.fabricmc:yarn', version.ref = 'yarn' }
+# cannot use v2 in such form
+# yarn-mapping = { module = 'net.fabricmc:yarn', version.ref = 'yarn' }
 yarn-patch = { module = 'dev.architectury:yarn-mappings-patch-neoforge', version.ref = 'yarn-patch' }
 
 

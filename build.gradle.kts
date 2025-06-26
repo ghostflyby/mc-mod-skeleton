@@ -40,7 +40,7 @@ subprojects {
         @Suppress("UnstableApiUsage")
         "mappings"(
             loom.layered {
-                mappings(libs.yarn.mapping)
+                mappings("net.fabricmc:yarn:${libs.versions.yarn.asProvider().get()}")
                 mappings(libs.yarn.patch)
             },
         )
