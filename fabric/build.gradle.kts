@@ -14,7 +14,6 @@ loom {
 val common: Configuration by configurations.creating
 val shadowCommon: Configuration by configurations.creating
 
-@Suppress("UnstableApiUsage")
 configurations {
     compileClasspath.get().extendsFrom(common)
     runtimeClasspath.get().extendsFrom(common)
@@ -73,9 +72,7 @@ tasks.shadowJar {
 }
 
 tasks.remapJar {
-    dependsOn(tasks.shadowJar)
-
-    inputFile.set(tasks.shadowJar.get().archiveFile)
+    inputFile.set(tasks.shadowJar.flatMap { it.archiveFile })
 
     injectAccessWidener.set(true)
 
@@ -88,9 +85,9 @@ tasks.jar {
 }
 
 tasks.sourcesJar {
-    val commonSources = project(":common").tasks.getByName<Jar>("sourcesJar")
+    val commonSources = project(":common").tasks.named<Jar>("sourcesJar")
     dependsOn(commonSources)
-    from(commonSources.archiveFile.map { zipTree(it) })
+    from(commonSources.flatMap { it.archiveFile }.map { zipTree(it) })
 }
 
 tasks.remapSourcesJar {
