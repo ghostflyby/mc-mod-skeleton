@@ -31,5 +31,11 @@ jobs:
                     gradle-version: wrapper
                     cache-read-only: ${{ github.ref != 'refs/heads/main' && !startsWith(github.ref, 'refs/heads/mc/') }}
             -   name: run build
+                id: build
                 shell: pwsh
                 run: ./gradlew build
+            -   uses: actions/upload-artifact@v4
+                if: ${{steps.build.outcome == 'failure'}}
+                with:
+                    name: problem-report
+                    path: build/reports/problems/*.html
