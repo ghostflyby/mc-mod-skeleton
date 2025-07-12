@@ -51,26 +51,18 @@ dependencies {
     }
 }
 
+val tokens =
+    mapOf(
+        "version" to version,
+        "mod_id" to providers.gradleProperty("mod_id"),
+        "minecraft_version" to libs.versions.minecraft,
+        "kotlin_for_forge_version" to libs.versions.kotlinforforge,
+    )
 tasks.processResources {
-    val modVersion = version.toString()
-    val modId = rootProject.property("mod_id").toString()
-    val mcVersion = libs.versions.minecraft.get()
-    val kffVersion = libs.versions.kotlinforforge.get()
-    inputs.property("version", modVersion)
-    inputs.property("mod_id", modId)
-    inputs.property("minecraft_version", mcVersion)
-    inputs.property("kotlin_for_forge_version", kffVersion)
-    inputs.file("src/main/resources/META-INF/neoforge.mods.toml")
+    inputs.properties(tokens)
 
     filesMatching("META-INF/neoforge.mods.toml") {
-        expand(
-            mapOf(
-                "version" to modVersion,
-                "mod_id" to modId,
-                "minecraft_version" to mcVersion,
-                "kotlin_for_forge_version" to kffVersion,
-            ),
-        )
+        expand(tokens)
     }
 }
 
@@ -94,7 +86,7 @@ tasks.jar {
 }
 
 tasks.sourcesJar {
-    val commonSources = project(":common").tasks.named<Jar>("sourcesJar")
+    val commonSources = project(":common").tasks.sourcesJar
     dependsOn(commonSources)
     from(commonSources.flatMap { it.archiveFile }.map { zipTree(it) })
 }

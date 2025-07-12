@@ -34,34 +34,19 @@ dependencies {
     modRuntimeOnly(libs.fabric.kotlin)
 }
 
+val tokens =
+    mapOf(
+        "version" to version,
+        "mod_id" to providers.gradleProperty("mod_id"),
+        "minecraft_version" to libs.versions.minecraft,
+        "fabric_kotlin_version" to libs.versions.fabric.kotlin,
+        "fabric_api_version" to libs.versions.fabric.api,
+    )
 tasks.processResources {
-    val modVersion = project.version.toString()
-    val modId = rootProject.property("mod_id").toString()
-    val mcVersion = libs.versions.minecraft.get()
-    val fabricKotlinVersion =
-        libs.versions.fabric.kotlin
-            .get()
-    val fabricApiVersion =
-        libs.versions.fabric.api
-            .get()
-
-    inputs.property("version", modVersion)
-    inputs.property("mod_id", modId)
-    inputs.property("minecraft_version", mcVersion)
-    inputs.property("fabric_kotlin_version", fabricKotlinVersion)
-    inputs.property("fabric_api_version", fabricApiVersion)
-    inputs.file("src/main/resources/fabric.mod.json")
+    inputs.properties(tokens)
 
     filesMatching("fabric.mod.json") {
-        expand(
-            mapOf(
-                "version" to modVersion,
-                "mod_id" to modId,
-                "minecraft_version" to mcVersion,
-                "fabric_kotlin_version" to fabricKotlinVersion,
-                "fabric_api_version" to fabricApiVersion,
-            ),
-        )
+        expand(tokens)
     }
 }
 
@@ -85,7 +70,7 @@ tasks.jar {
 }
 
 tasks.sourcesJar {
-    val commonSources = project(":common").tasks.named<Jar>("sourcesJar")
+    val commonSources = project(":common").tasks.sourcesJar
     dependsOn(commonSources)
     from(commonSources.flatMap { it.archiveFile }.map { zipTree(it) })
 }
