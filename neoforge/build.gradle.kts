@@ -1,24 +1,5 @@
 plugins {
-    alias(libs.plugins.shadow)
-}
-
-architectury {
-    platformSetupLoomIde()
-    neoForge()
-}
-
-loom {
-    accessWidenerPath.set(project(":common").loom.accessWidenerPath)
-}
-
-val common: Configuration by configurations.creating
-val shadowCommon: Configuration by configurations.creating
-
-configurations {
-    compileClasspath.get().extendsFrom(common)
-    runtimeClasspath.get().extendsFrom(common)
-    val developmentNeoForge by getting
-    developmentNeoForge.extendsFrom(common)
+    `mc-targets-convention`
 }
 
 repositories {
@@ -42,9 +23,6 @@ dependencies {
     // modApi("dev.architectury:architectury-neoforge:${rootProject.property("architectury_version")}")
     modApi(libs.forgified.fabric.api)
 
-    common(project(":common", "namedElements")) { isTransitive = false }
-    shadowCommon(project(":common", "transformProductionNeoForge")) { isTransitive = false }
-
     // Kotlin For Forge
     runtimeOnly(libs.kotlinforforge) {
         exclude(group = "net.neoforged.fancymodloader", module = "loader")
@@ -54,9 +32,9 @@ dependencies {
 val tokens =
     mapOf(
         "version" to version,
-        "mod_id" to providers.gradleProperty("mod_id"),
-        "minecraft_version" to libs.versions.minecraft,
-        "kotlin_for_forge_version" to libs.versions.kotlinforforge,
+        "mod_id" to providers.gradleProperty("mod_id").get(),
+        "minecraft_version" to libs.versions.minecraft.get(),
+        "kotlin_for_forge_version" to libs.versions.kotlinforforge.get(),
     )
 tasks.processResources {
     inputs.properties(tokens)
@@ -64,34 +42,4 @@ tasks.processResources {
     filesMatching("META-INF/neoforge.mods.toml") {
         expand(tokens)
     }
-}
-
-tasks.shadowJar {
-    exclude("architectury.common.json")
-    configurations = listOf(shadowCommon)
-    archiveClassifier.set("dev-shadow")
-}
-
-tasks.remapJar {
-    inputFile.set(tasks.shadowJar.flatMap { it.archiveFile })
-
-    injectAccessWidener.set(true)
-
-    val metadata = listOf(project.name, libs.versions.minecraft.get()).joinToString("-")
-    archiveAppendix.set(metadata)
-}
-
-tasks.jar {
-    archiveClassifier.set("dev")
-}
-
-tasks.sourcesJar {
-    val commonSources = project(":common").tasks.sourcesJar
-    dependsOn(commonSources)
-    from(commonSources.flatMap { it.archiveFile }.map { zipTree(it) })
-}
-
-tasks.remapSourcesJar {
-    val metadata = listOf(project.name, "mc${libs.versions.minecraft.get()}").joinToString(".")
-    archiveVersion.set("$version+$metadata")
 }

@@ -47,7 +47,7 @@ yarn-patch = { module = 'dev.architectury:yarn-mappings-patch-neoforge', version
 
 
 [plugins]
-kotlin = { id = 'org.jetbrains.kotlin.jvm', version.ref = 'kotlin' }
+kotlin-jvm = { id = 'org.jetbrains.kotlin.jvm', version.ref = 'kotlin' }
 kotlin-serialization = { id = 'org.jetbrains.kotlin.plugin.serialization', version.ref = 'kotlin' }
 architectury-plugin = { id = 'architectury-plugin', version.ref = 'architectury-plugin' }
 architectury-loom = { id = 'dev.architectury.loom', version.ref = 'architectury-loom' }

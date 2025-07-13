@@ -1,3 +1,7 @@
+plugins {
+    `sub-projects-convention`
+//    `all-projects-convention`
+}
 architectury {
     common(rootProject.property("enabled_platforms").toString().split(","))
 }
