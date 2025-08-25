@@ -21,7 +21,7 @@ jobs:
                 id: jvm_version
                 shell: pwsh
                 run: gc ./gradle.properties|Select-String -Raw jvm_version= >> $env:GITHUB_OUTPUT
-            -   uses: actions/setup-java@v4
+            -   uses: actions/setup-java@v5
                 with:
                     distribution: microsoft
                     java-version: ${{ steps.jvm_version.outputs.jvm_version}}
