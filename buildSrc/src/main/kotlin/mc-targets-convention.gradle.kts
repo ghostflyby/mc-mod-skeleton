@@ -3,7 +3,7 @@ import dev.architectury.plugin.ModLoader
 plugins {
     id("sub-projects-convention")
     alias(libs.plugins.architectury.plugin)
-//    java
+    java
 //    alias(libs.plugins.kotlin.jvm)
 //    alias(libs.plugins.architectury.plugin)
 //    alias(libs.plugins.architectury.loom)
@@ -47,6 +47,7 @@ tasks.shadowJar {
     exclude("architectury.common.json")
     configurations = listOf(shadowCommon)
     archiveClassifier.set("dev-shadow")
+    destinationDirectory.set(layout.projectDirectory.dir("devlibs"))
 }
 
 tasks.remapJar {
@@ -69,6 +70,6 @@ tasks.named<Jar>("sourcesJar") {
 }
 
 tasks.remapSourcesJar {
-    val metadata = listOf(project.name, "mc${libs.versions.minecraft.get()}").joinToString(".")
-    archiveVersion.set("$version+$metadata")
+    val metadata = listOf(project.name, "${libs.versions.minecraft.get()}").joinToString("-")
+    archiveAppendix.set(metadata)
 }

@@ -1,4 +1,5 @@
-kotlinc.xml
-misc.xml
-
-runConfigurations
+*
+!.gitignore
+!codeStyles
+!inspectionProfiles
+!vcs.xml
