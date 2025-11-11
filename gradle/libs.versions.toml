@@ -9,7 +9,7 @@ fabric-kotlin = '1.13.0+kotlin.2.1.0' # https://www.curseforge.com/minecraft/mc-
 yarn = '1.21.1+build.3:v2'
 yarn-patch = '1.21+build.4'
 
-kotlin = '2.2.10'
+kotlin = '2.2.20'
 kotlinx-coroutines = '1.9.0'
 kotlinx-serialization = '1.9.0'
 
