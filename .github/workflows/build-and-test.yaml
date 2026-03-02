@@ -34,7 +34,7 @@ jobs:
                 id: build
                 shell: pwsh
                 run: ./gradlew build
-            -   uses: actions/upload-artifact@v5
+            -   uses: actions/upload-artifact@v7
                 if: ${{steps.build.outcome == 'failure'}}
                 with:
                     name: problem-report
