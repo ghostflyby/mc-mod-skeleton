@@ -19,7 +19,7 @@ kotlinforforge = '5.7.0' # https://www.curseforge.com/minecraft/mc-mods/kotlin-f
 forgified-fabric-api = '0.104.0+2.0.13+1.21.1'
 
 # plugins
-shadow = '8.1.1'
+shadow = '9.3.2'
 spotless = '8.0.0'
 
 architectury-loom = '1.9-SNAPSHOT'
@@ -52,7 +52,7 @@ kotlin-jvm = { id = 'org.jetbrains.kotlin.jvm', version.ref = 'kotlin' }
 kotlin-serialization = { id = 'org.jetbrains.kotlin.plugin.serialization', version.ref = 'kotlin' }
 architectury-plugin = { id = 'architectury-plugin', version.ref = 'architectury-plugin' }
 architectury-loom = { id = 'dev.architectury.loom', version.ref = 'architectury-loom' }
-shadow = { id = 'com.github.johnrengelman.shadow', version.ref = 'shadow' }
+shadow = { id = 'com.gradleup.shadow', version.ref = 'shadow' }
 spotless = { id = 'com.diffplug.spotless', version.ref = 'spotless' }
 
 [bundles]

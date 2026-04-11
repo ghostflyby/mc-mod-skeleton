@@ -48,6 +48,7 @@ tasks.shadowJar {
     configurations = listOf(shadowCommon)
     archiveClassifier.set("dev-shadow")
     destinationDirectory.set(layout.projectDirectory.dir("devlibs"))
+    includeEmptyDirs = false
 }
 
 tasks.remapJar {
