@@ -19,7 +19,7 @@ kotlinforforge = '5.7.0' # https://www.curseforge.com/minecraft/mc-mods/kotlin-f
 forgified-fabric-api = '0.104.0+2.0.13+1.21.1'
 
 # plugins
-shadow = '9.3.2'
+shadow = '9.4.1'
 spotless = '8.4.0'
 
 architectury-loom = '1.9-SNAPSHOT'
